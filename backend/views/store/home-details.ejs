@@ -1,0 +1,82 @@
+<%- include('../partials/head') %>
+
+  <body>
+    
+    <%- include('../partials/nav') %>
+    <h1 class="p-6 text-2xl font-semibold text-gray-700 text-center">Here are in home detail page and Id is <%=homeId %></h1>
+              <div class="flex item-center justify-center min-h-screen bg-slate-100">
+        <!--Card Container-->
+        <div class="flex flex-col p-6 space-y-10 rounded-2xl shadow-2xl bg-white 
+        md:flex-row md:space-y-0 md:space-x-10 md:m-0 md:p-auto md:my-auto">
+            <!--image div-->
+            <div>
+                <img src="/uploads/<%= home.file %>"
+                    alt="Profile Image" class="mx-auto duration-200 w-96 hover:scale-105">
+            </div>
+            <!--content-->
+            <div class="flex flex-col space-y-6">
+                <!--Label Description -->
+                <div class="flex flex-col mb-4 space-y-3 text-center md:text-left">
+                    <div>
+                        <div class="inline-block px-3 py-1 text-sm text-white bg-black rounded-full">
+                            Free Shipping
+                        </div>
+                    </div>
+                    <!--Title-->
+                    <div class="max-w-sm text-2xl font-bold">
+                         <%= home.username %>
+                    </div>
+                    <div class="max-w-sm text-xl font-semibold text-gray-500">
+                       <%= home.email %>
+
+                    </div>
+                    <!-- Price Container -->
+                    <div class="flex flex-col mb-4 space-y-3 text-center md:text-left">
+                        <div>
+                            <p class="text-4xl font-bold">₹ <%= home.price %> /night</p>
+                            <p class="text-sm text-green-600 font-bold">inclusive of all taxes</p>
+                        </div>
+                        <p class="text-sm font-light text-gray-500 font-medium">
+                            ⭐ Rating: <%= home.service_rating %>/5
+                        </p>
+                    </div>
+                    <!-- Button Group -->
+                    <div class="group">
+                        <button
+                            class="w-full transition-all duration-150 bg-blue-700 text-white border-b-8 border-b-blue-700 rounded-lg group-hover:border-t-8 group-hover:border-b-0 group-hover:bg-blue-700 group-hover:border-t-blue-700 group-hover:shadow-lg">
+                            <div
+                                class="px-8 py-4 duration-150 bg-blue-500 rounded-lg group-hover:bg-blue-700 font-semibold">
+                                Book
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Bottom Buttons Container -->
+                    <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-4 md:flex-row">
+                        <button
+                            class="flex items-center justify-center py-3 px-5 space-x-3 border-2 border-gray-300 rounded-lg shadow-sm hover:bg-opacity-30 hover:shadow-2lg hover:-translate-y-0.5 transition-all duration-150 hover:border-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 122.88 111.85">
+                                <path
+                                    d="M4.06,8.22A4.15,4.15,0,0,1,0,4.06,4.13,4.13,0,0,1,4.06,0h6A19.12,19.12,0,0,1,20,2.6c5.44,3.45,6.41,8.38,7.8,13.94h91a4.07,4.07,0,0,1,4.06,4.06,5,5,0,0,1-.21,1.25L112.06,64.61a4,4,0,0,1-4,3.13H41.51c1.46,5.41,2.92,8.32,4.89,9.67C48.8,79,53,79.08,59.93,79h47.13a4.06,4.06,0,0,1,0,8.12H60c-8.63.1-13.94-.11-18.2-2.91s-6.66-7.91-8.95-17h0L18.94,14.46c0-.1,0-.1-.11-.21a7.26,7.26,0,0,0-3.12-4.68A10.65,10.65,0,0,0,10,8.22H4.06Zm80.32,25a2.89,2.89,0,0,1,5.66,0V48.93a2.89,2.89,0,0,1-5.66,0V33.24Zm-16.95,0a2.89,2.89,0,0,1,5.67,0V48.93a2.89,2.89,0,0,1-5.67,0V33.24Zm-16.94,0a2.89,2.89,0,0,1,5.66,0V48.93a2.89,2.89,0,0,1-5.66,0V33.24Zm41.72-8.58H30.07l9.26,34.86H105l8.64-34.86Zm2.68,67.21a10,10,0,1,1-10,10,10,10,0,0,1,10-10Zm-43.8,0a10,10,0,1,1-10,10,10,10,0,0,1,10-10Z" />
+                            </svg>
+                            <span>Add to cart</span>
+                        </button>
+
+                        <button
+                            class="flex items-center justify-center py-3 px-5 space-x-3 border-2 border-gray-300 rounded-lg shadow-sm hover:bg-opacity-30 hover:shadow-2lg hover:-translate-y-0.5 transition-all duration-150 hover:border-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 122.88 107.21">
+                                <path
+                                    d="M73.13,93.77,59.58,107.21,44,92.19c-2.43-2.35-5.25-4.92-8.18-7.59C19.93,70.14.79,52.69,0,31.09l0-1.65A28.51,28.51,0,0,1,9,8.54,31.68,31.68,0,0,1,29.57.31l1.71,0c13.72.18,20,6.2,28.18,14.24C66.21,7.38,71.81,1.52,83.21.21a33.07,33.07,0,0,1,18.62,3.37,34.41,34.41,0,0,1,12.24,10.25,31,31,0,0,1,6,14.86A30.55,30.55,0,0,1,116.82,46c-.41.8-.88,1.65-1.39,2.52l-.45.74A30.65,30.65,0,0,1,73.13,93.77Zm15.22-35.6a3.69,3.69,0,0,1,.3-1.48l0-.06a3.8,3.8,0,0,1,2.06-2,3.94,3.94,0,0,1,1.47-.31h0a3.87,3.87,0,0,1,1.48.29,4.15,4.15,0,0,1,1.26.84,3.87,3.87,0,0,1,.84,1.25l0,.07a4,4,0,0,1,.28,1.4v7.78h7.75a3.87,3.87,0,0,1,1.48.29,3.92,3.92,0,0,1,1.26.84,4,4,0,0,1,.84,1.25l0,.07a3.78,3.78,0,0,1,.28,1.35v.15a3.86,3.86,0,0,1-.29,1.41,4.15,4.15,0,0,1-.84,1.26,3.7,3.7,0,0,1-1.25.83l-.07,0a4,4,0,0,1-1.39.28H96.12v7.75a3.87,3.87,0,0,1-.3,1.48A3.92,3.92,0,0,1,95,84.17l-.08.07a3.72,3.72,0,0,1-1.17.77l-.07,0a3.8,3.8,0,0,1-1.4.28h0a4.07,4.07,0,0,1-1.48-.3,3.85,3.85,0,0,1-2.09-2.08,3.79,3.79,0,0,1-.3-1.47V73.69H80.6a3.87,3.87,0,0,1-1.48-.3l-.06,0a3.58,3.58,0,0,1-1.2-.81A3.87,3.87,0,0,1,77,71.3l0-.07a4,4,0,0,1-.28-1.4v0A4,4,0,0,1,77,68.33a3.86,3.86,0,0,1,.84-1.27,4,4,0,0,1,1.25-.83,3.71,3.71,0,0,1,1.47-.3h7.78V58.17Zm21.7-13.31c.34-.58.67-1.17,1-1.76a24.13,24.13,0,0,0,2.56-13.67,24.39,24.39,0,0,0-4.72-11.73,27.78,27.78,0,0,0-9.92-8.31A26.62,26.62,0,0,0,84,6.68c-9.13,1-14,6.2-19.9,12.47l-4.43,4.64L55.2,19.45c-7.27-7.14-12.74-12.52-24-12.67l-1.4,0a25.21,25.21,0,0,0-16.36,6.5A22.12,22.12,0,0,0,6.49,29.52l0,1.34c.67,18.85,18.72,35.3,33.67,48.93,2.89,2.63,5.67,5.16,8.32,7.72l11,10.61,9-8.91a30.66,30.66,0,0,1,41.55-44.35Zm-.76,7.87a24.14,24.14,0,1,0,7.07,17.07,24.06,24.06,0,0,0-7.07-17.07Z" />
+                            </svg>
+                            <span>Add to wishlist</span>
+                        </button>
+                    </div>
+                    <%- include('../partials/favourite') %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+
+  </html>

@@ -1,0 +1,58 @@
+<header class="text-center bg-linear-to-r from-amber-200 to-yellow-300 p-6">
+  <h1 class="text-red-500 text-5xl">Shree Ganeshay Namah</h1>
+</header>
+<nav
+  class="contailner mx-auto flex justify-between items-center bg-red-500 text-white p-4 mt-2 shadow-md"
+>
+  <ul class="flex space-x-4">
+    <li>
+      <a
+        href="/"
+        class="<%= currentPage === 'Home'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >Home</a
+      >
+    </li>
+    <li>
+      <a
+        href="/index"
+        class="<%= currentPage === 'Indexpage'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >Index</a
+      >
+    </li>
+    <li>
+      <a
+        href="/host/host-home-list"
+        class="<%= currentPage === 'host-home'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >Host Home</a
+      >
+    </li>
+    <li>
+      <a
+        href="/contact-us"
+        class="<%= currentPage === 'contact-us'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >contact-Us</a
+      >
+    </li>
+    <li>
+      <a
+        href="/bookings"
+        class="<%= currentPage === 'Bookingspage'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >Booking</a
+      >
+    </li>
+    <li>
+      <a
+        href="/favourite-list"
+        class="<%= currentPage === 'Favourite_listpage'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >Favourite-list</a
+      >
+    </li>
+    <li>
+      <a
+        href="/getreserve"
+        class="<%= currentPage === 'Reservepage'? 'bg-white' : 'bg-green-200' %> py-2 px-4 rounded transition duration-300 text-black hover:text-white hover:bg-green-500"
+        >Reserve</a
+      >
+    </li>
+  </ul>
+</nav>

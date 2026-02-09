@@ -1,0 +1,83 @@
+<%- include('../partials/head') %>
+
+  </head>
+  <body>
+    
+      <%- include('../partials/nav') %>
+      <h1 class="text-center text-4xl m-2">Register Your Home on airbnb</h1>
+    <main>
+      <form
+        enctype="multipart/form-data"
+        action="/contact-us"
+        method="POST"
+        class="border-4 border-amber-500 p-4 m-4 rounded-lg justify-between"
+      >
+        <label for="username" class="p-2">Username:</label>
+        <input
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="text"
+          name="username"
+          placeholder="Enter Username"
+          required
+        /><br />
+
+        <label for="username" class="p-2">Email:</label>
+        <input
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="email"
+          id="email"
+          placeholder="Enter Email"
+          name="email"
+          required
+        /><br />
+        <label for="username" class="p-2">Price Per Night:</label>
+        <input
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="text"
+          id="price"
+          placeholder="Enter price"
+          name="price"
+          required
+        /><br />
+
+        <label for="username" class="p-2">Location:</label>
+        <textarea
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          rows="5"
+          cols="30"
+          id="location"
+          placeholder="Enter location"
+          name="location"
+          required
+        ></textarea>
+        <br />
+        <label for="username" class="p-2">Rating:</label><br />
+        <select name="service_rating" id="service_rating" class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full" required>
+          <option value="">Select a rating</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+        <label for="username" class="p-2">Profile Image:</label>
+        <input
+        class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="file"
+          name="profileImage"
+          accept="image/*"
+          required
+        /><br />
+        <br />
+
+        <button
+          type="submit"
+          class="border-2 border-green-500 p-2 rounded-lg hover:bg-green-500 hover:text-white"
+        >
+          Submit</button
+        ><br />
+        <br />
+      </form>
+    </main>
+  </body>
+</html>

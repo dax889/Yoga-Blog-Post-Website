@@ -1,0 +1,104 @@
+<%- include('../partials/head') %>
+
+  </head>
+  <body>
+     
+      <%- include('../partials/nav') %>
+      <h1 class="text-center text-4xl m-4"><%= editing ? 'Edit': 'Register' %>  your Contact-Us Page on airbnb</h1>
+    <main class="lg:pl-40 lg:pr-40 md:pl-10 md:pr-10"> 
+      <!-- <form
+        enctype="multipart/form-data"
+        action="/host/<%= editing ? 'edit-home' : 'contact-us' %>"
+        method="POST"
+        class="border-4 border-amber-500 p-4 m-4 rounded-lg justify-between"
+      > -->
+      <form
+          enctype="multipart/form-data"
+          action="/host/edit-home/<%= home.id %>"
+          method="POST"
+          class="border-4 border-amber-500 p-4 m-4 rounded-lg justify-between"
+        >
+
+      <input
+        class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="hidden"
+          name="text"
+          value="<%= editing ? home.id : '' %>"
+        />
+        <label for="username" class="p-2">Username:</label>
+        <input
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          value="<%= editing ? home.username : '' %>"
+          type="text"
+          name="username"
+          placeholder="Enter Username"
+          required
+        /><br />
+
+        <label for="username" class="p-2">Email:</label>
+        <input
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="email"
+          value="<%= editing ? home.email : '' %>"
+          id="email"
+          placeholder="Enter Email"
+          name="email"
+          required
+        /><br />
+        <label for="username" class="p-2">Price Per Night:</label>
+        <input
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="text"
+          value="<%= editing ? home.price : '' %>"
+          id="price"
+          placeholder="Enter price"
+          name="price"
+          required
+        /><br />
+
+        <label for="username" class="p-2">Location:</label>
+        <textarea
+          class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          rows="5"
+          cols="30"
+          id="location"
+          placeholder="Enter location"
+          name="location"
+          required
+        ><%= editing ? home.location : '' %></textarea>
+        <br />
+        <label for="username" class="p-2">Rating:</label><br />
+        <select name="service_rating" id="service_rating" value="<%= editing ? home.service_rating : '' %>" class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full" required>
+          <option value="">Select a rating</option>
+          <option value="5" <%= editing && home.service_rating == 5 ? 'selected' : '' %>>5</option>
+          <option value="4" <%= editing && home.service_rating == 4 ? 'selected' : '' %>>4</option>
+          <option value="3" <%= editing && home.service_rating == 3 ? 'selected' : '' %>>3</option>
+          <option value="2" <%= editing && home.service_rating == 2 ? 'selected' : '' %>>2</option>
+          <option value="1" <%= editing && home.service_rating == 1 ? 'selected' : '' %>>1</option>
+        </select>
+        <label for="username" class="p-2">Profile Image:</label>
+        <% if (editing && home.file) { %>
+          <p class="text-sm text-gray-600 mb-2">
+            Current file: <strong><%= home.file %></strong>
+          </p>
+        <% } %>
+
+        <input
+        class="bg-white border-2 border-blue-500 p-2 m-2 rounded-lg w-full"
+          type="file"
+          name="profileImage"
+          accept="image/*"
+        /><br />
+        <br />
+
+        <button
+          type="submit"
+          class="border-2 border-green-500 p-2 rounded-lg hover:bg-green-500 hover:text-white"
+        >
+          <%= editing ? 'Update home': 'Register' %></button
+        ><br />
+        <br />
+      </form>
+    </main>
+  </body>
+</html>
