@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -8,7 +8,8 @@ export default function Navbar() {
 
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  
+  const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const linkClass = ({ isActive }) =>
     isActive
@@ -19,6 +20,22 @@ export default function Navbar() {
     logout();
     navigate("/login");
   };
+  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className="bg-green-100 px-6 py-4">
@@ -70,15 +87,18 @@ export default function Navbar() {
           {user ? (
             <>
               <button
+                ref={buttonRef}
                 onClick={() => setOpen(!open)}
                 className="bg-green-700 text-white px-4 py-2 rounded-full hover:cursor-pointer"
               >
                 👤 {user.email.split("@")[0]}
               </button>
 
-              
               {open && (
-                <div className="absolute right-0 top-14 w-48 bg-white shadow rounded-xl">
+                <div
+                  className="absolute right-0 top-14 w-48 bg-white shadow rounded-xl"
+                  ref={dropdownRef}
+                >
                   {user.role === "superAdmin" && (
                     <>
                       <Link
