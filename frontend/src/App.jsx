@@ -38,9 +38,16 @@ export default function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
-
         {/* ADMIN ROUTES */}
-        <Route path="/admin" element={<AdminDashboard />}>
+        <Route
+          path="/admin"
+          element={
+            <SuperAdminRoute>
+              {" "}
+              <AdminDashboard />
+            </SuperAdminRoute>
+          }
+        >
           {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
           <Route
             path="dashboard"

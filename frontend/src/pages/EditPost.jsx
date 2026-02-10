@@ -56,51 +56,108 @@ const EditPost = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Edit Post</h1>
+  <div className="min-h-screen bg-[#f7f4ee] py-12 px-4">
+    <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+      
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-serif text-[#3a5a40]">
+          ✏️ Edit Your Yoga Post
+        </h1>
+        <p className="text-gray-600 mt-2">
+          Refine your thoughts and update your journey
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full border p-2 rounded"
-          placeholder="Title"
-          required
-        />
+      <form onSubmit={handleSubmit} className="space-y-6">
 
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full border p-2 rounded h-40"
-          placeholder="Content"
-          required
-        />
-
-        {/* Existing image */}
-        {existingImage && (
-          <img
-            src={`http://localhost:8000${existingImage}`}
-            alt="Post"
-            className="w-full h-48 object-cover rounded"
+        {/* Title */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Post Title
+          </label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+            placeholder="Enter a calming title"
+            required
           />
+        </div>
+
+        {/* Content */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Content
+          </label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 h-44 resize-none focus:outline-none focus:ring-2 focus:ring-green-600"
+            placeholder="Share your yoga wisdom..."
+            required
+          />
+        </div>
+
+        {/* Existing Image */}
+        {existingImage && (
+          <div>
+            <p className="text-sm font-medium text-gray-700 mb-2">
+              Current Cover Image
+            </p>
+            <div className="relative rounded-xl overflow-hidden border">
+              <img
+                src={`http://localhost:8000${existingImage}`}
+                alt="Post"
+                className="w-full h-56 object-cover"
+              />
+              <span className="absolute top-2 right-2 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
+                Current
+              </span>
+            </div>
+          </div>
         )}
 
-        <input
-          type="file"
-          onChange={(e) => setImage(e.target.files[0])}
-          className="w-full"
-        />
+        {/* Upload New Image */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Replace Image (optional)
+          </label>
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            className="block w-full text-sm text-gray-600
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-full file:border-0
+              file:bg-green-100 file:text-green-800
+              hover:file:bg-green-200"
+          />
+        </div>
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Update Post
-        </button>
+        {/* Action Buttons */}
+        <div className="flex justify-between items-center pt-6 border-t">
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="text-gray-600 hover:underline"
+          >
+            ← Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="bg-[#4f6f52] text-white px-8 py-3 rounded-xl font-semibold hover:bg-green-700 transition"
+          >
+            Update Post
+          </button>
+        </div>
+
       </form>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default EditPost;

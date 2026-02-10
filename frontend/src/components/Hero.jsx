@@ -1,6 +1,14 @@
+import { motion } from "framer-motion";
+import { fadeUp } from "../pages/Animations";
+
 export default function Hero() {
   return (
-    <section className="grid md:grid-cols-2 gap-10 px-10 py-16 items-center">
+    <motion.section
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      className="grid md:grid-cols-2 gap-10 px-10 py-16 items-center"
+    >
       <div>
         <h1 className="text-5xl font-serif text-[#3a5a40] leading-tight">
           Find Your Inner Peace
@@ -25,6 +33,6 @@ export default function Hero() {
           className="rounded-3xl object-cover h-80 "
         />
       </div>
-    </section>
+    </motion.section>
   );
 }

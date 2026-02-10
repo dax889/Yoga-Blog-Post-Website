@@ -6,6 +6,8 @@ import Features from "../components/Features";
 import TrendingTopics from "../components/TrendingTopics";
 import axios from "../api/axios";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../pages/Animations";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -106,10 +108,17 @@ export default function Home() {
         {posts.length === 0 && (
           <p className="text-center text-2xl">No posts yet</p>
         )}
-        <div className="grid md:grid-cols-4 gap-6">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-4 gap-6"
+        >
           {posts.map((post) => (
-            <div
+            <motion.div
               key={post._id}
+              variants={fadeUp}
               className="w-64 rounded-xl overflow-hidden bg-white shadow p-4"
             >
               {/* Image */}
@@ -155,9 +164,9 @@ export default function Home() {
               <p className="relative bottom-0 text-sm text-gray-500 mt-2">
                 By {post.author?.email}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
       {/* <div className="w-full"> */}
       {/* 🔥 Trending Blog Topics Section */}
@@ -199,7 +208,12 @@ export default function Home() {
             inspiration.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
+          <div
+            variants={fadeUp}
+            // initial="hidden"
+            animate="visible"
+            className="grid md:grid-cols-4 gap-6 mt-4"
+          >
             <div className="bg-white p-6 rounded-xl shadow">
               🧘‍♀️
               <h3 className="font-semibold mt-3">Mind–Body Balance</h3>

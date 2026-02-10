@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { getPosts } from "../services/api";
 import axios from "../api/axios";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../pages/Animations";
 
 export default function Blogs() {
   const [posts, setPosts] = useState([]);
@@ -101,14 +103,20 @@ export default function Blogs() {
       <section className="px-10 py-16">
         <h1 className="text-3xl font-bold text-center mb-6">Blogs</h1>
 
-        <div className="grid md:grid-cols-4 gap-6">
+        <motion.div
+          variants={staggerContainer}
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-4 gap-6"
+        >
           {filteredPosts.map((post) => {
             const canEdit = user && user._id === post.author?._id;
 
             return (
-              <div
+              <motion.div
                 key={post._id}
-                className="w-64 rounded-xl bg-white shadow p-4"
+                variants={fadeUp}
+                className="w-64 rounded-xl overflow-hidden bg-white shadow p-4"
               >
                 {post.image && (
                   <img
@@ -161,10 +169,10 @@ export default function Blogs() {
                   Read More →
                 </button>
                 <p className="text-gray-500">By {post.author?.email}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </section>
     </>
   );

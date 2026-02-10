@@ -28,7 +28,7 @@ export default function AdminDashboard() {
         </div>
 
         <div className="bg-white p-6 rounded shadow">
-          <h3 className="text-gray-500">Admins</h3>
+          <h3 className="text-gray-500">Writer</h3>
           <p className="text-3xl font-bold">{stats.admins}</p>
         </div>
       </div>

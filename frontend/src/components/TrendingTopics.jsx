@@ -1,5 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../pages/Animations";
 
 const topics = [
   {
@@ -62,12 +64,21 @@ export default function TrendingTopics() {
         </div>
 
         {/* Cards */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+        >
+
           {topics.map((item, index) => (
             <div
-              key={index}
-              className="bg-white rounded-2xl p-6 shadow hover:shadow-lg transition"
-            >
+                key={index}
+                variants={fadeUp}
+                className="bg-white rounded-2xl p-6 shadow hover:shadow-lg transition"
+              >
+
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl">{item.icon}</span>
                 <span className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full">
@@ -87,7 +98,7 @@ export default function TrendingTopics() {
               </button>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
