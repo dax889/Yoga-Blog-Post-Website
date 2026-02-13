@@ -108,3 +108,37 @@ export const toggleLike = async (req, res) => {
   await post.save();
   res.json({ likes: post.likes });
 };
+
+// PostController.js
+export const requestDeletePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // 🔒 Only post owner
+    if (post.author.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Not allowed" });
+    }
+
+    // 🔁 TOGGLE LOGIC
+    if (post.deleteRequest?.status === "pending") {
+      post.deleteRequest.status = "cancelled";
+      post.deleteRequest.requestedAt = null;
+    } else {
+      post.deleteRequest = {
+        status: "pending",
+        requestedBy: req.user.id,
+        requestedAt: new Date(),
+      };
+    }
+
+    await post.save();
+    res.json(post.deleteRequest);
+  } catch (err) {
+    console.error("Delete request error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+

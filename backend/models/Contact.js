@@ -10,7 +10,14 @@ const contactSchema = new mongoose.Schema(
       enum: ["pending", "replied"],
       default: "pending",
     },
+       // 🔴 THIS FIELD MUST EXIST
+    read: {
+      type: Boolean,
+      default: false,
+    },
+    
   },
+  
   { timestamps: true }
 );
 

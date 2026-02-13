@@ -28,13 +28,16 @@ import express from "express";
 import auth from "../middleware/auth.js";
 import upload from "../middleware/upload.js";
 import requireRole from "../middleware/requireRole.js";
+import Post from "../models/Post.js";
+
 import {
   createPost,
   getPosts,
   getSinglePost,
   updatePost,
   deletePost,
-  toggleLike
+  toggleLike,
+  requestDeletePost,
 } from "../controllers/postController.js";
 
 const router = express.Router();
@@ -59,6 +62,31 @@ router.put(
   upload.single("image"),
   updatePost,
 );
+
+// router.put("/:id/request-delete", auth, requestDeletePost);
+
+router.put("/:id/request-delete", auth, async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+
+  if (post.author.toString() !== req.user.id) {
+    return res.status(403).json({ message: "Not allowed" });
+  }
+
+  post.deleteRequest = {
+    requested: true,
+    requestedBy: req.user.id,
+    requestedAt: new Date(),
+    approved: null,
+  };
+
+  await post.save();
+  res.json({ message: "Delete request sent" });
+});
+
 
 router.delete("/:id", auth, requireRole("admin", "superAdmin"), deletePost);
 

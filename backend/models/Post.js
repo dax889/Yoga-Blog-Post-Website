@@ -15,6 +15,15 @@ const postSchema = new mongoose.Schema(
       default: 0,
     },
     likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+
+    deleteRequest: {
+      requested: { type: Boolean, default: false },
+      requestedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      requestedAt: Date,
+      approved: { type: Boolean, default: null },
+      reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      reviewedAt: Date,
+    },
   },
   { timestamps: true },
 );
