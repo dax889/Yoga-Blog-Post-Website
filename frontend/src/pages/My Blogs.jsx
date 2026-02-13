@@ -7,9 +7,9 @@ import axios from "../api/axios";
 export default function MyBlogs() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
-  // const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
     getPosts().then(setPosts);
@@ -17,7 +17,7 @@ export default function MyBlogs() {
 
   // ✅ Read more
   const handleReadMore = (postId) => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (!token) {
       navigate("/login");
@@ -40,7 +40,7 @@ export default function MyBlogs() {
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
         headers: {
@@ -62,9 +62,10 @@ export default function MyBlogs() {
     <section className="px-10 py-16">
       <h1 className="text-3xl font-bold mb-6 text-center">Blogs</h1>
 
-       {posts.length === 0 && <p className="text-center text-2xl">No posts yet</p>}
+      {posts.length === 0 && (
+        <p className="text-center text-2xl">No posts yet</p>
+      )}
       <div className="grid md:grid-cols-4 gap-6">
-
         {posts.map((post) => (
           <div
             key={post._id}
@@ -86,27 +87,24 @@ export default function MyBlogs() {
             <p className="mt-2 text-gray-600 line-clamp-3">{post.content}</p>
 
             {/* ✅ ADMIN ONLY */}
-           {user && (
-                post.author?._id === user._id || user.role === "admin"
-              ) && (
+            {user &&
+              (post.author?._id === user._id || user.role === "admin") && (
+                <div className="flex gap-2 mt-4">
+                  <button
+                    onClick={() => handleEdit(post._id)}
+                    className="bg-green-600 text-white px-3 py-1 rounded"
+                  >
+                    Edit
+                  </button>
 
-
-              <div className="flex gap-2 mt-4">
-                <button
-                  onClick={() => handleEdit(post._id)}
-                  className="bg-green-600 text-white px-3 py-1 rounded"
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() => handleDelete(post._id)}
-                  className="bg-red-600 text-white px-3 py-1 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            )}
+                  <button
+                    onClick={() => handleDelete(post._id)}
+                    className="bg-red-600 text-white px-3 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
 
             <button
               onClick={() => handleReadMore(post._id)}

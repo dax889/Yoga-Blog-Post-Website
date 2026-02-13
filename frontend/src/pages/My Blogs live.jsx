@@ -11,14 +11,14 @@ export default function Blogs() {
   const [filter, setFilter] = useState("all"); // all | mine
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
 
   const handleReadMore = (postId) => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) navigate("/login");
     else navigate(`/post/${postId}`);
   };
@@ -30,7 +30,7 @@ export default function Blogs() {
   // const handleDelete = async (postId) => {
   //   if (!window.confirm("Are you sure?")) return;
 
-  //   const token = localStorage.getItem("token");
+  //   const token = sessionStorage.getItem("token");
 
   //   await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
   //     headers: { Authorization: `Bearer ${token}` },
@@ -101,7 +101,7 @@ export default function Blogs() {
 
   const handleLike = async (postId) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       const res = await axios.patch(
         `/posts/${postId}/like`,

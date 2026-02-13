@@ -18,7 +18,7 @@ export const registerUser = async (form) => {
   return data;
 };
 
-const getToken = () => localStorage.getItem("token");
+const getToken = () => sessionStorage.getItem("token");
 
 export const apiFetch = async (url, options = {}) => {
   const token = getToken();
@@ -52,7 +52,7 @@ export const getPosts = async () => {
 };
 
 export const createPost = async (form) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const res = await fetch("http://localhost:8000/api/posts", {
     method: "POST",

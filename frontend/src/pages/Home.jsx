@@ -12,9 +12,9 @@ import { fadeUp, staggerContainer } from "../pages/Animations";
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
   const handleReadMore = (postId) => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (!token) {
       navigate("/login");
@@ -27,7 +27,7 @@ export default function Home() {
   }, []);
   const handleLike = async (postId) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       const res = await axios.patch(
         `/posts/${postId}/like`,

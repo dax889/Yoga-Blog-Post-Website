@@ -18,7 +18,7 @@ export default function Login() {
     try {
       const data = await loginUser(form);
       // MUST exist
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
 
       login(data); // ✅ THIS connects user to context
       navigate("/"); // ✅ redirect

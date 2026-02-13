@@ -5,7 +5,7 @@ import axios from "axios";
 const EditPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -33,7 +33,7 @@ const EditPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     const formData = new FormData();
     formData.append("title", title);

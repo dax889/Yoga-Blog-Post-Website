@@ -1,6 +1,6 @@
 // utils/auth.js
 export const getUser = () => {
-  const user = localStorage.getItem("user")
+  const user = sessionStorage.getItem("user")
   return user ? JSON.parse(user) : null
 }
 
@@ -10,5 +10,5 @@ export const isAdmin = () => {
 }
 
 export const isLoggedIn = () => {
-  return !!localStorage.getItem("token")
+  return !!sessionStorage.getItem("token")
 }

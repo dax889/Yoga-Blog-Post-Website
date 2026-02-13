@@ -7,9 +7,10 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // ✅ Load from sessionStorage (PER TAB)
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
+    const storedUser = sessionStorage.getItem("user");
+    const storedToken = sessionStorage.getItem("token");
 
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
@@ -19,16 +20,20 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
+  // ✅ Login (PER TAB)
   const login = (data) => {
-    localStorage.setItem("user", JSON.stringify(data.user));
-    localStorage.setItem("token", data.token);
+    sessionStorage.setItem("user", JSON.stringify(data.user));
+    sessionStorage.setItem("token", data.token);
 
     setUser(data.user);
     setToken(data.token);
   };
 
+  // ✅ Logout (ONLY THIS TAB)
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
+
     setUser(null);
     setToken(null);
   };

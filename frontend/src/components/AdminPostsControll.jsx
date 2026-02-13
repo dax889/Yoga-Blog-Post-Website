@@ -6,7 +6,7 @@ import axios from "../api/axios";
 export default function AdminPosts() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
-  // const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
 
   const loadPosts = async () => {
     const res = await api.get("/posts");
@@ -23,7 +23,7 @@ export default function AdminPosts() {
 
   // ✅ Read more
   const handleReadMore = (postId) => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (!token) {
       navigate("/login");
@@ -45,7 +45,7 @@ export default function AdminPosts() {
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
         headers: {
