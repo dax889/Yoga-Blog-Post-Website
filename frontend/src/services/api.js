@@ -1,4 +1,5 @@
 import axios from "../api/axios";
+import api from "../api/axios";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -112,5 +113,16 @@ export const sendContactMessage = async (data) => {
  */
 export const getAllContacts = async () => {
   const res = await axios.get("/contact");
+  return res.data;
+};
+// Authenticated
+// Authenticated
+export const requestDeletePost = async (postId) => {
+  const res = await axios.put(`/posts/${postId}/request-delete`, {});
+  return res.data;
+};
+export const getAdminStats = async () => {
+  const res = await api.get("/admin/stats");
+  console.log("ADMIN STATS 👉", res.data); // 👈 MUST SEE THIS
   return res.data;
 };

@@ -24,6 +24,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminContacts from "./pages/AdminContact";
+import Deleterequest from "./pages/Admindeleterequest";
 
 export default function App() {
   return (
@@ -67,6 +68,7 @@ export default function App() {
           />
           <Route path="users" element={<AdminUsers />} />
           <Route path="contacts" element={<AdminContacts />} />
+          <Route path="delete-requests" element={<Deleterequest />} />
         </Route>
         {/* Trending Topics Read more */}s
         <Route

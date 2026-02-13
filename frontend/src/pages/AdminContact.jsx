@@ -9,7 +9,7 @@ export default function AdminContacts() {
   }, []);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen ">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-800">
@@ -23,7 +23,7 @@ export default function AdminContacts() {
       {/* Table Card */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-green-100 text-gray-700 uppercase text-xs">
+          <thead className="bg-green-100 text-gray-700 uppercase text-xl">
             <tr>
               <th className="px-6 py-4 text-left">Name</th>
               <th className="px-6 py-4 text-left">Email</th>

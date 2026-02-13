@@ -55,39 +55,6 @@ export default function Home() {
     }
   };
 
-  const trendingTopics = [
-    {
-      title: "Sustainable Living",
-      description:
-        "Top 10 Eco-Friendly Yoga Mats for 2026 & practicing zero-waste wellness.",
-    },
-    {
-      title: "Mental Health",
-      description:
-        "Yoga therapy for managing work stress and 5-minute mindfulness for anxiety.",
-    },
-    {
-      title: "Niche Practices",
-      description:
-        "Introduction to Broga (Yoga for Men) and how aerial yoga improves core strength.",
-    },
-    {
-      title: "Technology & Wellness",
-      description:
-        "Best yoga wearables to monitor posture and improve practice in 2026.",
-    },
-    {
-      title: "Accessible Yoga",
-      description:
-        "Chair yoga for office workers and beginner-friendly 10-minute morning rituals.",
-    },
-    {
-      title: "Expert Guides",
-      description:
-        "The science of pranayama and how breathing techniques affect the brain.",
-    },
-  ];
-
   return (
     <>
       <Hero />
@@ -116,7 +83,7 @@ export default function Home() {
           className="grid md:grid-cols-4 gap-6"
         >
           {posts.map((post) => (
-            <motion.div
+            <div
               key={post._id}
               variants={fadeUp}
               className="w-64 rounded-xl overflow-hidden bg-white shadow p-4"
@@ -164,7 +131,7 @@ export default function Home() {
               <p className="relative bottom-0 text-sm text-gray-500 mt-2">
                 By {post.author?.email}
               </p>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </section>
@@ -196,90 +163,135 @@ export default function Home() {
       </section>
     </div> */}
       <TrendingTopics />
-      <section className="bg-[#eef4ed] py-16 px-6">
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="bg-[#eef4ed] py-16 px-6"
+      >
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-serif text-[#3a5a40] mb-4">
             Why Yoga Matters 🌿
           </h2>
+
           <p className="text-gray-700 max-w-3xl mx-auto">
             Yoga is more than movement — it’s a lifestyle that builds strength,
-            flexibility, mental clarity, and emotional balance. Our blog helps
-            you integrate yoga into modern life with practical guidance and
-            inspiration.
+            flexibility, mental clarity, and emotional balance.
           </p>
 
-          <div
-            variants={fadeUp}
-            // initial="hidden"
-            animate="visible"
-            className="grid md:grid-cols-4 gap-6 mt-4"
+          {/* Cards */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-6 mt-10"
           >
-            <div className="bg-white p-6 rounded-xl shadow">
-              🧘‍♀️
-              <h3 className="font-semibold mt-3">Mind–Body Balance</h3>
-              <p className="text-sm text-gray-600">
-                Improve focus, reduce stress, and feel grounded every day.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow">
-              💪
-              <h3 className="font-semibold mt-3">Strength & Flexibility</h3>
-              <p className="text-sm text-gray-600">
-                Build a strong, flexible body through mindful practice.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow">
-              🌱
-              <h3 className="font-semibold mt-3">Sustainable Living</h3>
-              <p className="text-sm text-gray-600">
-                Align your wellness journey with eco-friendly choices.
-              </p>
-            </div>
-          </div>
+            {[
+              {
+                icon: "🧘‍♀️",
+                title: "Mind–Body Balance",
+                desc: "Improve focus, reduce stress, and feel grounded every day.",
+              },
+              {
+                icon: "💪",
+                title: "Strength & Flexibility",
+                desc: "Build a strong, flexible body through mindful practice.",
+              },
+              {
+                icon: "🌱",
+                title: "Sustainable Living",
+                desc: "Align your wellness journey with eco-friendly choices.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="bg-white p-6 rounded-xl shadow"
+              >
+                <div className="text-3xl">{item.icon}</div>
+                <h3 className="font-semibold mt-3">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </section>
-      <section className="bg-[#4f6f52] py-16 px-6 text-white">
+      </motion.section>
+
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="bg-[#4f6f52] py-16 px-6 text-white"
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-serif mb-4">
             Join Our Yoga Community 🧘
           </h2>
+
           <p className="mb-6">
-            Get weekly yoga tips, mindful living guides, and exclusive content
-            straight to your inbox.
+            Get weekly yoga tips, mindful living guides, and exclusive content.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <input
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row justify-center gap-4"
+          >
+            <motion.input
+              variants={fadeUp}
               type="email"
               placeholder="Enter your email"
               className="px-4 py-3 rounded text-black w-full sm:w-80"
             />
-            <button className="bg-white text-[#4f6f52] px-6 py-3 rounded font-semibold">
+            <motion.button
+              variants={fadeUp}
+              className="bg-white text-[#4f6f52] px-6 py-3 rounded font-semibold"
+            >
               Subscribe
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
-      </section>
-      <section className="py-16 bg-[#f7f4ee]">
+      </motion.section>
+
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="py-16 bg-[#f7f4ee]"
+      >
         <h2 className="text-3xl font-serif text-center text-[#3a5a40] mb-10">
           What Our Readers Say
         </h2>
 
-        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 px-6">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 px-6"
+        >
           {[
             "This blog helped me start yoga without fear.",
             "Simple, practical, and calming content.",
             "Perfect balance of wellness and science.",
           ].map((quote, i) => (
-            <div key={i} className="bg-white p-6 rounded-xl shadow">
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              className="bg-white p-6 rounded-xl shadow"
+            >
               <p className="text-gray-600 italic">“{quote}”</p>
               <p className="mt-4 font-semibold text-[#3a5a40]">— John Smith</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     </>
   );
 }

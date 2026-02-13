@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getPosts } from "../services/api";
+import { getPosts, requestDeletePost } from "../services/api";
 import axios from "../api/axios";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -27,16 +27,70 @@ export default function Blogs() {
     navigate(`/edit-post/${postId}`);
   };
 
-  const handleDelete = async (postId) => {
-    if (!window.confirm("Are you sure?")) return;
+  // const handleDelete = async (postId) => {
+  //   if (!window.confirm("Are you sure?")) return;
 
-    const token = localStorage.getItem("token");
+  //   const token = localStorage.getItem("token");
 
-    await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  //   await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   });
 
-    setPosts((prev) => prev.filter((p) => p._id !== postId));
+  //   setPosts((prev) => prev.filter((p) => p._id !== postId));
+  // };
+  // const handleDeleteRequest = async (postId) => {
+  //   const confirm = window.confirm(
+  //     "Your delete request will be sent to admin for approval.",
+  //   );
+  //   if (!confirm) return;
+
+  //   try {
+  //     await requestDeletePost(postId);
+
+  //     // ✅ Update UI immediately
+  //     setPosts((prev) =>
+  //       prev.map((p) =>
+  //         p._id === postId
+  //           ? {
+  //               ...p,
+  //               deleteRequest: {
+  //                 requested: true,
+  //                 approved: null,
+  //               },
+  //             }
+  //           : p,
+  //       ),
+  //     );
+  //   } catch (err) {
+  //     alert("Failed to send delete request");
+  //   }
+  // };
+  const handleDeleteRequest = async (postId) => {
+    const confirm = window.confirm(
+      "Your delete request will be sent to admin for approval.",
+    );
+    if (!confirm) return;
+
+    try {
+      await requestDeletePost(postId);
+
+      setPosts((prev) =>
+        prev.map((p) =>
+          p._id === postId
+            ? {
+                ...p,
+                deleteRequest: {
+                  ...p.deleteRequest,
+                  requested: true,
+                  approved: null,
+                },
+              }
+            : p,
+        ),
+      );
+    } catch (err) {
+      alert("Failed to send delete request");
+    }
   };
 
   // ✅ Filter logic
@@ -103,7 +157,7 @@ export default function Blogs() {
       <section className="px-10 py-16">
         <h1 className="text-3xl font-bold text-center mb-6">Blogs</h1>
 
-        <motion.div
+        <div
           variants={staggerContainer}
           whileInView="visible"
           viewport={{ once: true }}
@@ -113,7 +167,7 @@ export default function Blogs() {
             const canEdit = user && user._id === post.author?._id;
 
             return (
-              <motion.div
+              <div
                 key={post._id}
                 variants={fadeUp}
                 className="w-64 rounded-xl overflow-hidden bg-white shadow p-4"
@@ -153,12 +207,24 @@ export default function Blogs() {
                         Edit
                       </button>
 
-                      <button
+                      {/* <button
                         onClick={() => handleDelete(post._id)}
                         className="bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer"
                       >
                         Delete
-                      </button>
+                      </button> */}
+                      {post.deleteRequest?.requested ? (
+                        <span className="bg-yellow-600 text-white px-3 py-1 rounded hover:cursor-pointer">
+                          🕒pending
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => handleDeleteRequest(post._id)}
+                          className="bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      )}
                     </div>
                   )}
                 </div>
@@ -169,10 +235,10 @@ export default function Blogs() {
                   Read More →
                 </button>
                 <p className="text-gray-500">By {post.author?.email}</p>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </section>
     </>
   );
